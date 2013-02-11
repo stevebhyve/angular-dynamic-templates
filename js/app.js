@@ -6,21 +6,14 @@ app.directive('contentItem', function ($compile) {
     var noteTemplate = '<div class="entry-note"><h2>&nbsp;</h2><div class="entry-text"><div class="entry-title">{{content.title}}</div><div class="entry-copy">{{content.data}}</div></div></div>';
 
     var getTemplate = function(contentType) {
-        var template = '';
-
-        switch(contentType) {
-            case 'image':
-                template = imageTemplate;
-                break;
-            case 'video':
-                template = videoTemplate;
-                break;
-            case 'notes':
-                template = noteTemplate;
-                break;
+        var templates = {
+            image: 'imageTemplate',
+            video: 'videoTemplate',
+            notes: 'noteTemplate'
         }
-
-        return template;
+        return templates[contentType];
+        //  if you are not sure or want a default
+       // return (templates[contentType])?this[contentType]:'defaultTemplate';
     }
 
     var linker = function(scope, element, attrs) {
